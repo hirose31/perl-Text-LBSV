@@ -37,10 +37,10 @@ SYNOPSIS
       is $lbsv->to_s, "hoge:foo\abar:baz";
 
 DESCRIPTION
-    Labeled Bell-separated Values (LBSV) format is a variant of Bell-separated
-    Values (BSV). Each record in a LBSV file is represented as a single
-    line. Each field is separated by BELL and has a label and a value. The
-    label and the value have been separated by ':'.
+    Labeled Bell-separated Values (LBSV) format is a variant of
+    Bell-separated Values (BSV). Each record in a LBSV file is represented
+    as a single line. Each field is separated by BELL and has a label and a
+    value. The label and the value have been separated by ':'.
 
     cf: <http://lbsv.org/>
 
@@ -51,8 +51,7 @@ DESCRIPTION
     reference(s).
 
 AUTHOR
-    HIROSE Masaaki <hirose31@gmail.com>
-    Naoya Ito <i.naoya@gmail.com>
+    HIROSE Masaaki <hirose31@gmail.com> Naoya Ito <i.naoya@gmail.com>
 
 LICENSE
     This library is free software; you can redistribute it and/or modify it
