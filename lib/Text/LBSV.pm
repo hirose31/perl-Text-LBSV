@@ -171,6 +171,7 @@ reference(s).
 
 =head1 AUTHOR
 
+HIROSE Masaaki E<lt>hirose31@gmail.comE<gt>
 Naoya Ito E<lt>i.naoya@gmail.comE<gt>
 
 =head1 LICENSE
