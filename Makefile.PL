@@ -1,7 +1,7 @@
 use inc::Module::Install;
-name 'Text-LTSV';
-all_from 'lib/Text/LTSV.pm';
-readme_from 'lib/Text/LTSV.pm';
+name 'Text-LBSV';
+all_from 'lib/Text/LBSV.pm';
+readme_from 'lib/Text/LBSV.pm';
 
 requires 'Tie::IxHash';
 requires 'Project::Libs';
@@ -13,7 +13,7 @@ author_tests 'xt';
 
 test_requires 'Test::More';
 
-install_script 'bin/ltsview';
+install_script 'bin/lbsview';
 
 auto_set_repository;
 auto_include;

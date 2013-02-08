@@ -2,17 +2,17 @@ use strict;
 use Test::More tests => 3;
 
 use utf8;
-use Text::LTSV;
+use Text::LBSV;
 
-my $ltsv = Text::LTSV->new(
+my $lbsv = Text::LBSV->new(
     hoge => 'foo',
     bar  => 'baz',
 );
 
-my $line = $ltsv->to_s;
+my $line = $lbsv->to_s;
 
-is $line, "hoge:foo\tbar:baz";
+is $line, "hoge:foo\abar:baz";
 
-my $p = Text::LTSV->new;
+my $p = Text::LBSV->new;
 is($p->parse_line($line)->{hoge}, 'foo');
 is($p->parse_line($line)->{bar}, 'baz');

@@ -2,13 +2,13 @@ use strict;
 use Test::More tests => 13;
 
 use utf8;
-use Text::LTSV;
+use Text::LBSV;
 use Errno ();
 
-my $p = Text::LTSV->new;
+my $p = Text::LBSV->new;
 
 {
-    my $data = $p->parse_file_utf8('./t/test.ltsv');
+    my $data = $p->parse_file_utf8('./t/test.lbsv');
     is $data->[0]->{hoge}, 'foo';
     is $data->[0]->{bar}, 'baz';
     is $data->[1]->{perl}, '5.17.8';
@@ -19,7 +19,7 @@ my $p = Text::LTSV->new;
 }
 
 {
-    my $it = $p->parse_file_iter_utf8('./t/test.ltsv');
+    my $it = $p->parse_file_iter_utf8('./t/test.lbsv');
 
     ok $it->has_next;
     my $hash = $it->next;

@@ -1,4 +1,4 @@
-package Text::LTSV;
+package Text::LBSV;
 use strict;
 use warnings;
 
@@ -6,7 +6,7 @@ our $VERSION = '0.05';
 
 use IO::File;
 use Carp qw/croak/;
-use Text::LTSV::Iterator;
+use Text::LBSV::Iterator;
 
 sub new {
     my ($self, @kv) = @_;
@@ -62,7 +62,7 @@ sub parse_line {
         require Tie::IxHash;
         tie %kv, 'Tie::IxHash';
     }
-    for (map { [ split ':', $_, 2 ] } split "\t", $line) {
+    for (map { [ split ':', $_, 2 ] } split "\a", $line) {
         next if $has_ignores and $ignores{$_->[0]};
         next if $has_wants and not $wants{$_->[0]};
         $kv{$_->[0]} = $_->[1];
@@ -91,7 +91,7 @@ sub parse_file_iter {
     my ($self, $path, $opt) = @_;
     $opt ||= {};
     my $fh = IO::File->new($path, $opt->{utf8} ? '<:utf8' : 'r') or croak $!;
-    return Text::LTSV::Iterator->new($self, $fh);
+    return Text::LBSV::Iterator->new($self, $fh);
 }
 
 sub parse_file_iter_utf8 {
@@ -107,7 +107,7 @@ sub to_s {
     for (my $i = 0; $i < $n; $i += 2) {
         push @out, join ':', $self->{_kv}->[$i], $self->{_kv}->[$i+1];
     }
-    return join "\t", @out;
+    return join "\a", @out;
 }
 
 
@@ -116,22 +116,22 @@ __END__
 
 =head1 NAME
 
-Text::LTSV - Labeled Tab Separated Value manipulator
+Text::LBSV - Labeled Bell Separated Value manipulator
 
 =head1 SYNOPSIS
 
-  use Text::LTSV;
-  my $p = Text::LTSV->new;
-  my $hash = $p->parse_line("hoge:foo\tbar:baz\n");
+  use Text::LBSV;
+  my $p = Text::LBSV->new;
+  my $hash = $p->parse_line("hoge:foo\abar:baz\n");
   is $hash->{hoge}, 'foo';
   is $hash->{bar},  'baz';
 
-  my $data = $p->parse_file('./t/test.ltsv'); # or parse_file_utf8
+  my $data = $p->parse_file('./t/test.lbsv'); # or parse_file_utf8
   is $data->[0]->{hoge}, 'foo';
   is $data->[0]->{bar}, 'baz';
 
   # Iterator interface
-  my $it = $p->parse_file_iter('./t/test.ltsv'); # or parse_file_iter_utf8
+  my $it = $p->parse_file_iter('./t/test.lbsv'); # or parse_file_iter_utf8
   while ($it->has_next) {
       my $hash = $it->next;
       ...
@@ -139,34 +139,34 @@ Text::LTSV - Labeled Tab Separated Value manipulator
   $it->end;
 
   # Only want certain fields?
-  my $p = Text::LTSV->new;
+  my $p = Text::LBSV->new;
   $p->want_fields('hoge');
-  $p->parse_line("hoge:foo\tbar:baz\n");
+  $p->parse_line("hoge:foo\abar:baz\n");
 
   # Vise versa
-  my $p = Text::LTSV->new;
+  my $p = Text::LBSV->new;
   $p->ignore_fields('hoge');
-  $p->parse_line("hoge:foo\tbar:baz\n");
+  $p->parse_line("hoge:foo\abar:baz\n");
 
-  my $ltsv = Text::LTSV->new(
+  my $lbsv = Text::LBSV->new(
     hoge => 'foo',
     bar  => 'baz',
   );
-  is $ltsv->to_s, "hoge:foo\tbar:baz";
+  is $lbsv->to_s, "hoge:foo\abar:baz";
 
 =head1 DESCRIPTION
 
-Labeled Tab-separated Values (LTSV) format is a variant of
-Tab-separated Values (TSV). Each record in a LTSV file is represented
-as a single line. Each field is separated by TAB and has a label and a
+Labeled Bell-separated Values (LBSV) format is a variant of
+Bell-separated Values (BSV). Each record in a LBSV file is represented
+as a single line. Each field is separated by BELL and has a label and a
 value. The label and the value have been separated by ':'.
 
-cf: L<http://ltsv.org/>
+cf: L<http://lbsv.org/>
 
 This format is useful for log files, especially HTTP access_log.
 
-This module provides a simple way to process LTSV-based string and
-files, which converts Key-Value pair(s) of LTSV to Perl's hash
+This module provides a simple way to process LBSV-based string and
+files, which converts Key-Value pair(s) of LBSV to Perl's hash
 reference(s).
 
 =head1 AUTHOR

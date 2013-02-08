@@ -1,4 +1,4 @@
-Revision history for Perl extension Text::LTSV
+Revision history for Perl extension Text::LBSV
 
 0.05    Wed Feb  8
         - add File Iterator interface ($parser->parse_file_iter, parse_file_iter_utf8)

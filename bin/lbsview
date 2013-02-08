@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 use Project::Libs;
-use Text::LTSV;
+use Text::LBSV;
 use Getopt::Long;
 use UNIVERSAL::require;
 
@@ -17,7 +17,7 @@ $opt->getoptions(
     'no-color'         => \my $no_color,
 );
 
-my $p = Text::LTSV->new;
+my $p = Text::LBSV->new;
 $p->want_fields(map { split ',' } @keys) if @keys;
 $p->ignore_fields(map { split ',' } @ignore) if @ignore;
 
@@ -40,11 +40,11 @@ __END__
 
 =head1 NAME
 
-ltsview - convert LTSV to color-formatted output
+lbsview - convert LBSV to color-formatted output
 
 =head1 USAGE
 
   ## in top of this module's direcotry
-  $ cat example/example_log.ltsv | perl bin/ltsview -k ua,req,time
+  $ cat example/example_log.lbsv | perl bin/lbsview -k ua,req,time
 
 NOTE: You need to install L<YAML::Tiny::Color>

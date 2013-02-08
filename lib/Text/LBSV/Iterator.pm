@@ -1,4 +1,4 @@
-package Text::LTSV::Iterator;
+package Text::LBSV::Iterator;
 use strict;
 use warnings;
 
